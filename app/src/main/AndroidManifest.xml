@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="33" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="33" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_sec_config"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Beaconnext.light"
+        tools:targetApi="31">
+        <activity
+            android:name=".screens.AttendanceResult"
+            android:exported="false" />
+        <activity
+            android:name=".screens.LectureHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screens.StudentProfile"
+            android:exported="false" />
+        <activity
+            android:name=".screens.CreateLecture"
+            android:exported="false" />
+        <activity
+            android:name=".screens.ProfDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".screens.Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".screens.Register"
+            android:exported="false" />
+        <activity
+            android:name=".screens.Login"
+            android:exported="false" />
+        <activity
+            android:name=".screens.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.kontakt.sdk.android.ble.service.ProximityService"
+            android:exported="false" />
+        <service android:name=".service.ForegroundScan" />
+    </application>
+
+</manifest>

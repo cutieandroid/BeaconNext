@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/filsonreg"
+        android:text="MoodleId"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/moodleid"
+        app:layout_constraintStart_toStartOf="@+id/moodleid" />
+
+    <EditText
+        android:id="@+id/moodleid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20mdp"
+        android:layout_marginTop="@dimen/_50mdp"
+        android:background="@drawable/edittextbg"
+        android:drawableLeft="@drawable/baseline_123_24"
+        android:drawablePadding="@dimen/_10mdp"
+        android:fontFamily="@font/filsonreg"
+        android:hint="Enter moodle id"
+
+        android:inputType="number"
+        android:maxLength="8"
+        android:paddingHorizontal="@dimen/_10mdp"
+        android:paddingVertical="@dimen/_10mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/markPresentbtn"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20mdp"
+        android:background="@drawable/buttonbg"
+        android:elevation="10dp"
+        android:fontFamily="@font/filsonheavy"
+        android:gravity="center"
+        android:paddingVertical="@dimen/_10mdp"
+        android:text="Mark Present"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15font_mdp"
+        app:layout_constraintTop_toBottomOf="@+id/moodleid"
+        tools:layout_editor_absoluteX="26dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

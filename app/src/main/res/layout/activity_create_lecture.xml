@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.CreateLecture">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/createlecturetextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20mdp"
+            android:layout_marginLeft="@dimen/_10mdp"
+            android:layout_marginBottom="@dimen/_20mdp"
+            android:fontFamily="@font/filsonheavy"
+            android:text="Create A Lecture Here"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_20font_mdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.07"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/filsonreg"
+            android:text="Classroom"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/classroom"
+            app:layout_constraintStart_toStartOf="@+id/classroom" />
+
+        <EditText
+            android:id="@+id/classroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30mdp"
+            android:layout_marginHorizontal="@dimen/_20mdp"
+            android:background="@drawable/edittextbg"
+            android:drawableLeft="@drawable/baseline_123_24"
+            android:drawablePadding="@dimen/_10mdp"
+            android:fontFamily="@font/filsonreg"
+            android:hint="Enter room number"
+            android:maxLength="3"
+            android:inputType="number"
+            android:paddingHorizontal="@dimen/_10mdp"
+            android:paddingVertical="@dimen/_10mdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createlecturetextview" />
+
+
+        <TextView
+            android:id="@+id/SubjectText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/filsonreg"
+            android:text="Subject"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/Subject"
+            app:layout_constraintStart_toStartOf="@+id/textView5" />
+
+        <EditText
+            android:id="@+id/Subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20mdp"
+            android:layout_marginTop="@dimen/_40mdp"
+            android:background="@drawable/edittextbg"
+            android:drawableLeft="@drawable/baseline_abc_24"
+
+            android:drawablePadding="@dimen/_10mdp"
+            android:fontFamily="@font/filsonreg"
+            android:hint="Enter subject"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="@dimen/_10mdp"
+            android:paddingVertical="@dimen/_10mdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/classroom" />
+
+        <LinearLayout
+            android:id="@+id/llayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_30mdp"
+            app:layout_constraintTop_toBottomOf="@+id/Subject"
+            tools:layout_editor_absoluteX="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/divtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/filsonreg"
+                    android:text="Division"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/division"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/division"
+                    android:layout_width="@dimen/_100mdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20mdp"
+                    android:background="@drawable/edittextbg"
+                    android:drawableLeft="@drawable/baseline_abc_24"
+                    android:drawablePadding="@dimen/_10mdp"
+                    android:fontFamily="@font/filsonreg"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="1"
+                    android:paddingHorizontal="@dimen/_10mdp"
+                    android:paddingVertical="@dimen/_10mdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divtext"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/deptText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Department"
+                    android:fontFamily="@font/filsonreg"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/spinner"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    >
+
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/edittextbg"
+                    android:layout_marginEnd="@dimen/_20mdp"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/deptText"
+                    app:layout_constraintVertical_bias="0.0"
+                    >
+
+                </Spinner>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_30mdp"
+            app:layout_constraintTop_toBottomOf="@+id/llayout"
+            tools:layout_editor_absoluteX="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/minTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/filsonreg"
+                    android:text="Min.Time"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/minTime"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/minTime"
+                    android:layout_width="@dimen/_120mdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20mdp"
+                    android:background="@drawable/edittextbg"
+                    android:drawableLeft="@drawable/baseline_123_24"
+                    android:drawablePadding="@dimen/_10mdp"
+                    android:fontFamily="@font/filsonreg"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:paddingHorizontal="@dimen/_10mdp"
+                    android:paddingVertical="@dimen/_10mdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/minTimeText"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/yearText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Year"
+                    android:fontFamily="@font/filsonreg"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/spinneryear"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    >
+
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/spinneryear"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/edittextbg"
+                    android:layout_marginEnd="@dimen/_20mdp"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yearText"
+                    app:layout_constraintVertical_bias="0.0"
+                    >
+
+                </Spinner>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_30mdp"
+            app:layout_constraintTop_toBottomOf="@+id/llayout2"
+            tools:layout_editor_absoluteX="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/fromTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/filsonreg"
+                    android:text="From"
+                    android:drawableLeft="@drawable/baseline_schedule_24"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/fromTime"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fromTime"
+                    android:layout_width="@dimen/_120mdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20mdp"
+                    android:background="@drawable/edittextbg"
+                    android:ellipsize="marquee"
+                    android:gravity="center"
+                    android:fontFamily="@font/filsonreg"
+                    android:inputType="textPersonName"
+                    android:minHeight="@dimen/_40mdp"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.509"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fromTimeText"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/toText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="To"
+                    android:drawableLeft="@drawable/baseline_schedule_24"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:fontFamily="@font/filsonreg"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/totime"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    >
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/totime"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="@dimen/_20mdp"
+                    android:background="@drawable/edittextbg"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/toText"
+                    app:layout_constraintVertical_bias="0.0">
+
+                </TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/createattendancebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20mdp"
+            android:layout_marginTop="54dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/dashboardbutton"
+            android:fontFamily="@font/filsonheavy"
+            android:text="Create Attendance"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_15font_mdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/llayout3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/llayout3"
+            app:layout_constraintTop_toBottomOf="@+id/llayout3">
+
+        </Button>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/_25mdp"
+    tools:context=".screens.StudentProfile">
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_50mdp"
+            android:elevation="20dp"
+            android:text="BeaconNext"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_22font_mdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_25mdp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/splashscreenbg"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.792"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_10mdp">
+
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/filsonreg"
+                    android:text="A.p Shah Institue of Technology"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12font_mdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/userimage"
+                    app:layout_constraintStart_toStartOf="@+id/userimage"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/userimage"
+                    android:layout_width="@dimen/_80mdp"
+                    android:layout_height="@dimen/_80mdp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10"
+                    app:srcCompat="@drawable/group_23" />
+
+                <TextView
+                    android:id="@+id/sname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/filsonheavy"
+                    android:text="Nikita Kadam"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12font_mdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/userimage"
+                    app:layout_constraintStart_toStartOf="@+id/userimage"
+                    app:layout_constraintTop_toBottomOf="@+id/userimage" />
+
+                <TextView
+                    android:id="@+id/sdiv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/filsonheavy"
+                    android:text="B"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/_12font_mdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/sname"
+                    app:layout_constraintStart_toStartOf="@+id/sname"
+                    app:layout_constraintTop_toBottomOf="@+id/sname" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/filsonreg"
+                    android:text="MoodleId: "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10font_mdp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sdiv" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/filsonreg"
+                    android:text="e-mail: "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10font_mdp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="@dimen/_70mdp"
+                    android:layout_height="@dimen/_70mdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/userimage"
+                    app:layout_constraintEnd_toEndOf="@+id/userimage"
+                    app:layout_constraintStart_toStartOf="@+id/userimage"
+                    app:layout_constraintTop_toTopOf="@+id/userimage"
+
+                     />
+
+                <TextView
+                    android:id="@+id/mmemail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/filsonreg"
+                    android:text="20102038@apsit.edu.in"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11font_mdp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                    app:layout_constraintEnd_toEndOf="@+id/textView10"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView16"
+                    app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+
+                <TextView
+                    android:id="@+id/syear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/filsonheavy"
+                    android:text="4"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/_12font_mdp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/sdiv"
+                    app:layout_constraintEnd_toStartOf="@+id/sdiv"
+                    app:layout_constraintHorizontal_bias="0.80"
+                    app:layout_constraintStart_toStartOf="@+id/sname" />
+
+                <TextView
+                    android:id="@+id/textView125"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/filsonreg"
+                    android:text="Department: "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10font_mdp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintStart_toStartOf="@+id/textView16"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                <TextView
+                    android:id="@+id/msdepartment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/filsonreg"
+                    android:scrollHorizontally="true"
+                    android:text="Computer Engineering"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11font_mdp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView125"
+                    app:layout_constraintEnd_toEndOf="@+id/textView10"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView125"
+                    app:layout_constraintTop_toTopOf="@+id/textView125"
+                    app:layout_constraintVertical_bias="0.24" />
+
+                <TextView
+                    android:id="@+id/mmid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/filsonreg"
+                    android:text="20102038"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11font_mdp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView15"
+                    app:layout_constraintEnd_toEndOf="@+id/textView10"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView15"
+                    app:layout_constraintTop_toTopOf="@+id/textView15" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
