@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.beaconnext.R;
 import com.example.beaconnext.adapters.AttendanceResultAdapter;
@@ -40,17 +41,21 @@ public class AttendanceResult extends AppCompatActivity {
     TextView placeHolderText, markPresentBtn;
     EditText moodleId;
     LocalStorage ls;
+    SwipeRefreshLayout attrefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_attendance_result);
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        String flag = getIntent().getStringExtra("flag");
+        //String flag = getIntent().getStringExtra("flag");
         apiInterface = AuthApiClient.getClient().create(AuthApiInterface.class);
         lectureId = getIntent().getStringExtra("lecture");
+        attrefreshLayout=findViewById(R.id.attrefreshlayout);
+
         ls = new LocalStorage(this);
-        if (flag.equals("markPresent")) {
+        /*if (flag.equals("markPresent")) {
             setContentView(R.layout.mark_present);
             markPresentBtn = findViewById(R.id.markPresentbtn);
             moodleId = findViewById(R.id.moodleid);
@@ -66,9 +71,8 @@ public class AttendanceResult extends AppCompatActivity {
                 }
             });
 
+        }*/
 
-        } else {
-            setContentView(R.layout.activity_attendance_result);
 
             rv = findViewById(R.id.rv);
             placeHolderText = findViewById(R.id.placeHolderText);
@@ -77,10 +81,19 @@ public class AttendanceResult extends AppCompatActivity {
             adapter = new AttendanceResultAdapter(this, attendance);
             rv.setAdapter(adapter);
             showAttendance();
+
+        attrefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                attendance.clear();
+                showAttendance();
+                attrefreshLayout.setRefreshing(false);
+            }
+        });
         }
 
 
-    }
+
 
     private void markPresent(String mid, String lectureId) {
         MarkPresentRequest request = new MarkPresentRequest(mid, lectureId);
@@ -107,6 +120,7 @@ public class AttendanceResult extends AppCompatActivity {
     }
 
     void showAttendance() {
+        System.out.println(lectureId);
         AttendanceResultRequest requestbody = new AttendanceResultRequest(lectureId);
         Call<ArrayList<AttendanceResultResponse>> getresultCall = apiInterface.getLectureAttendance(ls.getToken(), requestbody);
         getresultCall.enqueue(new Callback<ArrayList<AttendanceResultResponse>>() {
@@ -128,7 +142,7 @@ public class AttendanceResult extends AppCompatActivity {
 
                 } else {
                     progressBar.setVisibility(View.GONE);
-                    placeHolderText.setText("Cannot get Attendance for this lecture :(");
+                    placeHolderText.setText("No Attendance yet :(");
                     placeHolderText.setVisibility(View.VISIBLE);
 
                 }

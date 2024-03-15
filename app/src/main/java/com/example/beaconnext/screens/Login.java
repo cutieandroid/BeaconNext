@@ -115,9 +115,15 @@ public class Login extends AppCompatActivity {
                 Gson gson = new Gson();
                 SharedPrefWrapper sharedprefobj = gson.fromJson(currentuser, SharedPrefWrapper.class);
                 if (sharedprefobj.getType().equals("student")) {
-                    startActivity(new Intent(Login.this, Dashboard.class));
+                    Intent intent= new Intent(Login.this, Dashboard.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
                 } else if (sharedprefobj.getType().equals("teacher")) {
-                    startActivity(new Intent(Login.this, ProfDashboard.class));
+                    Intent intent= new Intent(Login.this, ProfDashboard.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
 
                 }
             } else {

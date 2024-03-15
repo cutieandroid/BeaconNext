@@ -36,15 +36,17 @@ public class AttendanceResultAdapter extends RecyclerView.Adapter<AttendanceResu
 
         AttendanceResultResponse attendanceResultResponse = attendance.get(position);
 
-        holder.studentName.setText(attendanceResultResponse.getId().getName());
-        holder.attcount.setText("Count: " + String.valueOf(attendanceResultResponse.getCount()));
+        holder.studentName.setText(attendanceResultResponse.getId().getMoodleId().toString());
+        holder.attcount.setText("Inclass Duration: " + String.valueOf(attendanceResultResponse.getCount()));
         boolean status = attendanceResultResponse.isPresent();
         if (status == true) {
             holder.status.setTextColor(Color.GREEN);
+            holder.status.setText("Present");
         } else {
             holder.status.setTextColor(Color.RED);
+            holder.status.setText("In class,not yet present");
         }
-        holder.status.setText(String.valueOf(status));
+       // holder.status.setText(String.valueOf(status));
     }
 
     @Override

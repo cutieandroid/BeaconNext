@@ -26,11 +26,16 @@ import com.kontakt.sdk.android.ble.manager.listeners.simple.SimpleIBeaconListene
 import com.kontakt.sdk.android.common.profile.IBeaconDevice;
 import com.kontakt.sdk.android.common.profile.IBeaconRegion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ForegroundScan extends Service {
+
+    ArrayList<String> uuids= new ArrayList<>();
 
     public static final String TAG = ForegroundScan.class.getSimpleName();
 
@@ -61,7 +66,7 @@ public class ForegroundScan extends Service {
                 //Using ranging for continuous scanning or MONITORING for scanning with intervals
                 .scanPeriod(ScanPeriod.RANGING)
                 //Using BALANCED for best performance/battery ratio
-                .scanMode(ScanMode.BALANCED);
+                .scanMode(ScanMode.LOW_LATENCY);
 
         // Set up iBeacon listener
         proximityManager.setIBeaconListener(createIBeaconListener());
@@ -75,16 +80,26 @@ public class ForegroundScan extends Service {
         Toast.makeText(this, "Service is running...", Toast.LENGTH_SHORT).show();
 
         Handler handler = new Handler();
-        Runnable runnable;
-        // Schedule the function to run every, for example, 10 seconds
-        handler.postDelayed(runnable = new Runnable() {
+
+        handler.postDelayed(new Runnable() {
             public void run() {
-                // Your repeated function goes here
-                // Toast.makeText(ForegroundScan.this, "service is still running", Toast.LENGTH_SHORT).show();
                 startScanning();
-                stopScanning();
-                markAttendance();
-                handler.postDelayed(this, 20000); // 10 seconds interval
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        stopScanning();
+                        System.out.println(uuids);
+                        if(uuids.contains("f7826da6-4fa2-4e98-8024-bc5b71e0893e")){
+                            buuid="f7826da6-4fa2-4e98-8024-bc5b71e0893e";
+                            markAttendance();
+                        }
+                        uuids.clear();
+
+                    }
+                },8000);
+
+                handler.postDelayed(this,15000);
+
             }
         }, 0); // 10 seconds initial delay
 
@@ -114,7 +129,7 @@ public class ForegroundScan extends Service {
             @Override
             public void onServiceReady() {
                 proximityManager.startScanning();
-                //Toast.makeText(ForegroundScan.this, "Scanning service started.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ForegroundScan.this, "Scanning service started.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -124,10 +139,9 @@ public class ForegroundScan extends Service {
             @Override
             public void onIBeaconDiscovered(IBeaconDevice ibeacon, IBeaconRegion region) {
                 Log.i(TAG, "onIBeaconDiscovered: " + ibeacon.toString());
-                buuid=ibeacon.getProximityUUID().toString();
-                // Toast.makeText(ForegroundScan.this, ibeacon.toString(), Toast.LENGTH_SHORT).show();
-            }
+                uuids.add(ibeacon.getProximityUUID().toString());
 
+            }
             @Override
             public void onIBeaconLost(IBeaconDevice ibeacon, IBeaconRegion region) {
                 super.onIBeaconLost(ibeacon, region);
@@ -140,7 +154,8 @@ public class ForegroundScan extends Service {
         //Stop scanning if scanning is in progress
         if (proximityManager.isScanning()) {
             proximityManager.stopScanning();
-            //  Toast.makeText(this, "Scanning stopped", Toast.LENGTH_SHORT).show();
+
+             Toast.makeText(this, "Scanning stopped", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -157,6 +172,7 @@ public class ForegroundScan extends Service {
                         Toast.makeText(ForegroundScan.this, "Marked", Toast.LENGTH_SHORT).show();
                     }
                     else{
+                        System.out.println(response.errorBody());
 
                         stopSelf();
                         Toast.makeText(ForegroundScan.this, "Cannot mark", Toast.LENGTH_SHORT).show();

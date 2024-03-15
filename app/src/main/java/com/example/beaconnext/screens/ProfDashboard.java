@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.beaconnext.R;
 import com.example.beaconnext.api.AuthClient.AuthApiClient;
@@ -30,13 +31,14 @@ import retrofit2.Response;
 public class ProfDashboard extends AppCompatActivity {
     Button createAttendacne;
     TextView sname, placeHolderText, lectime, classroom, subname, lecturer;
-    CardView scheduledLectures, cardViewNew, lectureHistory, requestButton;
+    CardView scheduledLectures, cardViewNew, lectureHistory,notibutton,markstudent, requestButton;
     ImageView imageview5;
     LocalStorage ls;
     ProgressBar progressBar;
     AuthApiInterface apiInterface;
 
     String lectureId;
+    SwipeRefreshLayout profdashrefreshlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +64,11 @@ public class ProfDashboard extends AppCompatActivity {
         lecturer = findViewById(R.id.lecturer);
         progressBar = findViewById(R.id.progressBar);
         lectureHistory = findViewById(R.id.lectureHistory);
-        requestButton = findViewById(R.id.requestButton);
+        notibutton=findViewById(R.id.notiButton);
+        markstudent=findViewById(R.id.markattendance);
+       // requestButton = findViewById(R.id.requestButton);
         imageview5.setImageResource(currentuser.getGender().equals("Male") ? R.drawable.userimage_male : R.drawable.userimage);
-
+        profdashrefreshlayout=findViewById(R.id.profdashrefreshlayout);
         checkOngoingLec();
 
         createAttendacne.setOnClickListener(new View.OnClickListener() {
@@ -100,10 +104,39 @@ public class ProfDashboard extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ProfDashboard.this, AttendanceResult.class);
                 i.putExtra("lecture", lectureId);
+                i.putExtra("flag","result");
                 view.getContext().startActivity(i);
             }
         });
-        requestButton.setOnClickListener(new View.OnClickListener() {
+
+        notibutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProfDashboard.this,CreateNotification.class);
+                startActivity(i);
+
+            }
+        });
+
+        profdashrefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                checkOngoingLec();
+                profdashrefreshlayout.setRefreshing(false);
+            }
+        });
+
+        markstudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(ProfDashboard.this, LectureHistoryActivity.class);
+                i.putExtra("flag", "markattendance");
+                startActivity(i);
+
+            }
+        });
+      /*  requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ProfDashboard.this, LectureHistoryActivity.class);
@@ -111,7 +144,7 @@ public class ProfDashboard extends AppCompatActivity {
                 startActivity(i);
 
             }
-        });
+        });*/
     }
 
 

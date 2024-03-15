@@ -5,41 +5,62 @@ import com.google.gson.annotations.SerializedName;
 import retrofit2.http.QueryMap;
 
 public class Notifications {
-    public Notifications(int id, String notifications) {
-        this.id = id;
-        this.notifications = notifications;
+   String title,description,department,year,division,EndTime;
+
+    public Notifications(String title, String description, String department, String year, String division, String endTime) {
+        this.title = title;
+        this.description = description;
+        this.department = department;
+        this.year = year;
+        this.division = division;
+        this.EndTime = endTime;
     }
 
-    int id;
-
-    public int getId() {
-        return id;
+    public String getTitle() {
+        return title;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-
-    @SerializedName("title")
-    String notifications;
-
-    public String getnotifications() {
-        return notifications;
+    public String getDescription() {
+        return description;
     }
 
-    @Override
-    public String toString() {
-        return "Notifications{" +
-                "id=" + id +
-                ", notifications='" + notifications + '\'' +
-                '}';
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setnotifications(String notifications) {
-        this.notifications = notifications;
+    public String getDepartment() {
+        return department;
     }
 
-    public Notifications() {
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getDivision() {
+        return division;
+    }
+
+    public void setDivision(String division) {
+        this.division = division;
+    }
+
+    public String getEndTime() {
+        return EndTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.EndTime = endTime;
     }
 }

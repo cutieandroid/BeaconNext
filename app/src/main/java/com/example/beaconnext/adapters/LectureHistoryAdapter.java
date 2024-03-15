@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.beaconnext.R;
 import com.example.beaconnext.models.Lecture;
 import com.example.beaconnext.screens.AttendanceResult;
+import com.example.beaconnext.screens.MarkPresent;
 import com.example.beaconnext.singleton.DateHandler;
 
 import java.util.ArrayList;
@@ -48,10 +49,18 @@ public class LectureHistoryAdapter extends RecyclerView.Adapter<LectureHistoryAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), AttendanceResult.class);
-                i.putExtra("lecture", lecture.getLectureid());
-                i.putExtra("flag", flag);
-                view.getContext().startActivity(i);
+                if(flag.equals("markattendance")){
+                    Intent i = new Intent(view.getContext(), MarkPresent.class);
+                    i.putExtra("lecture",lecture.getLectureid());
+                    view.getContext().startActivity(i);
+                }
+                else{
+                    Intent i = new Intent(view.getContext(), AttendanceResult.class);
+                    i.putExtra("lecture", lecture.getLectureid());
+                    i.putExtra("flag", flag);
+                    view.getContext().startActivity(i);
+                }
+
 
             }
         });

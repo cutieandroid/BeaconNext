@@ -10,6 +10,7 @@ import com.example.beaconnext.models.AuthModels.Response.FirstLoginResponse;
 import com.example.beaconnext.models.AuthModels.Response.LoginResponse;
 import com.example.beaconnext.models.Lecture;
 import com.example.beaconnext.models.MarkPresentRequest;
+import com.example.beaconnext.models.Notifications;
 import com.example.beaconnext.models.Student;
 import com.example.beaconnext.models.Teacher;
 
@@ -70,5 +71,9 @@ public interface AuthApiInterface {
     @POST("mark-present")
     Call<AttendanceRequest> markPresent(@Header("Authorization") String token, @Body MarkPresentRequest markPresentRequest);
 
+    @POST("create-notification")
+    Call<Notifications> createNotification(@Header("Authorization") String token, @Body Notifications notifications);
 
+    @GET("get-notification-student")
+    Call<List<Notifications>> getNotifications(@Header("Authorization") String token);
 }

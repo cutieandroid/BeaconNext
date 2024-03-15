@@ -27,6 +27,12 @@
         android:theme="@style/Theme.Beaconnext.light"
         tools:targetApi="31">
         <activity
+            android:name=".screens.CreateNotification"
+            android:exported="false" />
+        <activity
+            android:name=".screens.MarkPresent"
+            android:exported="false" />
+        <activity
             android:name=".screens.AttendanceResult"
             android:exported="false" />
         <activity

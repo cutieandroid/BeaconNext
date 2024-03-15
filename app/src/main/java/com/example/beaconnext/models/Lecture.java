@@ -22,7 +22,7 @@ public class Lecture {
         this.lecturer = lecturer;
     }
 
-    @SerializedName("class")
+    @SerializedName("roomNo")
     Integer classRoom;
     Integer minimumTime;
 
@@ -138,4 +138,19 @@ public class Lecture {
     }
 
 
+    @Override
+    public String toString() {
+        return "Lecture{" +
+                "subjectName='" + subjectName + '\'' +
+                ", department='" + department + '\'' +
+                ", StartTime='" + StartTime + '\'' +
+                ", EndTime='" + EndTime + '\'' +
+                ", year=" + year +
+                ", division='" + division + '\'' +
+                ", lecturer='" + lecturer + '\'' +
+                ", lectureid='" + lectureid + '\'' +
+                ", classRoom=" + classRoom +
+                ", minimumTime=" + minimumTime +
+                '}';
+    }
 }

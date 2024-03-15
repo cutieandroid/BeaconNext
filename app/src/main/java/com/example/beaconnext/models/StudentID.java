@@ -1,20 +1,20 @@
 package com.example.beaconnext.models;
 
 public class StudentID{
-    String name;
+    Long moodleId;
 
     public StudentID() {
     }
 
-    public StudentID(String name) {
-        this.name = name;
+    public StudentID(Long moodleId) {
+        this.moodleId = moodleId;
     }
 
-    public String getName() {
-        return name;
+    public Long getMoodleId() {
+        return moodleId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMoodleId(String name) {
+        this.moodleId = moodleId;
     }
 }

@@ -21,55 +21,48 @@ import com.example.beaconnext.R;
 import com.example.beaconnext.adapters.SpinnerAdapter;
 import com.example.beaconnext.api.AuthClient.AuthApiClient;
 import com.example.beaconnext.api.AuthClient.AuthApiInterface;
-import com.example.beaconnext.models.Lecture;
+import com.example.beaconnext.models.Notifications;
 import com.example.beaconnext.singleton.DateHandler;
 import com.example.beaconnext.singleton.LocalStorage;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateLecture extends AppCompatActivity {
+public class CreateNotification extends AppCompatActivity {
+
+    LocalStorage localStorage;
     Spinner spinner, spinneryear;
     String selectedDepartment = "Computer";
     Integer selectedYear = 1;
-    TextView fromTime, totime;
-    Button createAttedanceButton;
-    EditText classroom, Subject, division, minTime;
+    TextView toTime;
+    Button createNotificationButton;
+    EditText notititle,notidescription,division;
     AuthApiInterface apiInterface;
-    LocalStorage localStorage;
     ProgressDialog progressDialog;
-    String from, to;
-    int FROM_CODE = 0;
     int TO_CODE = 1;
+    String from, to;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_lecture);
+        setContentView(R.layout.activity_create_notification);
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         localStorage = new LocalStorage(this);
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("BeaconNext");
-        progressDialog.setMessage("Creating Lecture...");
+        progressDialog.setMessage("Creating Notification...");
         spinner = findViewById(R.id.spinner);
         spinneryear = findViewById(R.id.spinneryear);
-        fromTime = findViewById(R.id.fromTime);
-        totime = findViewById(R.id.totime);
-        createAttedanceButton = findViewById(R.id.createattendancebutton);
-        Subject = findViewById(R.id.Subject);
-        classroom = findViewById(R.id.classroom);
-        division = findViewById(R.id.division);
-        minTime = findViewById(R.id.minTime);
-
+        toTime = findViewById(R.id.totime);
+        createNotificationButton = findViewById(R.id.createnotificationbutton);
+        notititle=findViewById(R.id.notititle);
+        notidescription=findViewById(R.id.notidescription);
+        division=findViewById(R.id.division);
         SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this);
 
         spinner.setAdapter(SpinnerAdapter.Deptadapter);
@@ -87,6 +80,7 @@ public class CreateLecture extends AppCompatActivity {
 
             }
         });
+
         spinneryear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -99,72 +93,64 @@ public class CreateLecture extends AppCompatActivity {
             }
         });
 
-        fromTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDateTimePicker(0);
-
-            }
-        });
-        totime.setOnClickListener(new View.OnClickListener() {
+        toTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDateTimePicker(1);
             }
         });
 
-        createAttedanceButton.setOnClickListener(new View.OnClickListener() {
+        createNotificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (checkInput()) {
-                    Toast.makeText(CreateLecture.this, "All fields are required :(", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateNotification.this, "All fields are required :(", Toast.LENGTH_SHORT).show();
                 } else {
-                    String subjectName = Subject.getText().toString();
-                    String department = selectedDepartment;
-                    String StartTime = from;
+                    String title = notititle.getText().toString();
+                    String department = selectedDepartment;;
                     String EndTime = to;
-                    Integer year = selectedYear;
+                    String year = selectedYear.toString();
                     String divisiondata = division.getText().toString();
-                    Integer classRoomdata = Integer.parseInt(classroom.getText().toString());
-                    Integer minimumTime = Integer.parseInt(minTime.getText().toString());
-                    createLecture(subjectName, department, StartTime, EndTime, year, divisiondata, classRoomdata, minimumTime);
+                    String description= notidescription.getText().toString();
+                    createNoti(title,department,EndTime,year,divisiondata,description);
                 }
-
-
             }
         });
 
-
     }
 
-    private void createLecture(String subjectName, String department, String startTime, String endTime, Integer year, String divisiondata, Integer classRoomdata, Integer minimumTime) {
+    private void createNoti(String title, String department, String endTime, String year, String divisiondata, String description) {
+
         progressDialog.show();
-        Lecture lecture = new Lecture(subjectName, department, startTime, endTime, year, divisiondata, classRoomdata, minimumTime);
-        System.out.println(lecture.toString());
-        apiInterface = AuthApiClient.getClient().create(AuthApiInterface.class);
-        Call<Lecture> lectureCall = apiInterface.createLecture(localStorage.getToken(), lecture);
-        lectureCall.enqueue(new Callback<Lecture>() {
+        Notifications creatednotifications= new Notifications(title,description,department,year,divisiondata,endTime);
+        apiInterface= AuthApiClient.getClient().create(AuthApiInterface.class);
+        Call<Notifications> notificationsCall= apiInterface.createNotification(localStorage.getToken(), creatednotifications);
+        notificationsCall.enqueue(new Callback<Notifications>() {
             @Override
-            public void onResponse(Call<Lecture> call, Response<Lecture> response) {
+            public void onResponse(Call<Notifications> call, Response<Notifications> response) {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
-                    Toast.makeText(CreateLecture.this, "Lecture created successfully :)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateNotification.this, "Lecture created successfully :)", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     progressDialog.dismiss();
                     int message= response.code();
-                    Toast.makeText(CreateLecture.this, ""+message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateNotification.this, ""+message, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Lecture> call, Throwable t) {
+            public void onFailure(Call<Notifications> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(CreateLecture.this, "Error creating lecture, please check you connection :(", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateNotification.this, "Error creating lecture, please check you connection :(", Toast.LENGTH_SHORT).show();
+
             }
         });
 
     }
+
+
+
 
     private void showDateTimePicker(int code) {
         final Calendar calendar = Calendar.getInstance();
@@ -188,7 +174,6 @@ public class CreateLecture extends AppCompatActivity {
         );
         datePickerDialog.show();
     }
-
     private void showTimePicker(int selectedYear, int selectedMonth, int selectedDay, int code) {
         final Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -238,28 +223,19 @@ public class CreateLecture extends AppCompatActivity {
     }
 
     private void showDateTime(String dateTime, int code,String dateTimeToShow) {
-          DateHandler handler= new DateHandler();
-        if (code == 0) {
-            from = DateHandler.utcConverter(dateTime);
-            fromTime.setText(dateTimeToShow);
-
-        } else {
+        DateHandler handler= new DateHandler();
+        if (code == 1) {
             to = DateHandler.utcConverter(dateTime);
-            totime.setText(dateTimeToShow);
-        }
+            toTime.setText(dateTimeToShow);
 
+        }
     }
 
     private boolean checkInput() {
-        if (Subject.getText().toString().isEmpty() || division.getText().toString().isEmpty() || classroom.getText().toString().isEmpty() || minTime.getText().toString().isEmpty() || from == null || to == null || selectedDepartment == null || selectedYear == null) {
+        if (notititle.getText().toString().isEmpty() || division.getText().toString().isEmpty() || notidescription.getText().toString().isEmpty()|| to== null || selectedDepartment == null || selectedYear == null) {
 
             return true;
         }
         return false;
     }
-
-
-
-
-
 }

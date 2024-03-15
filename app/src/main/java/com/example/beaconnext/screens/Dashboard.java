@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.beaconnext.App;
 import com.example.beaconnext.R;
@@ -52,6 +53,7 @@ public class Dashboard extends AppCompatActivity {
     ProgressBar progressBar;
     public static final String TAG = "ProximityManager";
     String lectureId;
+    SwipeRefreshLayout refreshlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +80,24 @@ public class Dashboard extends AppCompatActivity {
         subname=findViewById(R.id.subname);
         lecturer=findViewById(R.id.lecturer);
         progressBar=findViewById(R.id.progressBar);
+        refreshlayout=findViewById(R.id.refreshlayout);
+        refreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                checkOngoingLec();
+                notifications.clear();
+                getNoti();
+                refreshlayout.setRefreshing(false);
+            }
+        });
 
         ls= new LocalStorage(this);
+        System.out.println(ls.getToken());
         Student currentuser=ls.getCurrentStudent();
         sname.setText(currentuser.getName());
-        imageview5.setImageResource(currentuser.getGender().equals("Male")?R.drawable.userimage_male:R.drawable.userimage);
+        imageview5.setImageResource(currentuser.getGender().equals("male")?R.drawable.userimage_male:R.drawable.userimage);
         checkOngoingLec();
+        getNoti();
 
         scheduledLectures = findViewById(R.id.scheduledlectures);
         scheduledLectures.setBackgroundResource(R.drawable.cardbg);
@@ -111,8 +125,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
     }
-
-
     private void checkOngoingLec() {
         String token= ls.getToken();
         Call<List<Lecture>> ongoinglectureCall= apiInterface.ongoingLectureStudent(token);
@@ -159,5 +171,22 @@ public class Dashboard extends AppCompatActivity {
 
             }
         });
+    }
+    private void getNoti(){
+        String token=ls.getToken();
+        Call<List<Notifications>> notificationcall= apiInterface.getNotifications(token);
+        notificationcall.enqueue(new Callback<List<Notifications>>() {
+            @Override
+            public void onResponse(Call<List<Notifications>> call, Response<List<Notifications>> response) {
+                List<Notifications> tempnotifications=response.body();
+                notifications.addAll(tempnotifications);
+                notificationAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onFailure(Call<List<Notifications>> call, Throwable t) {
+
+            }
+        });
+
     }
 }
