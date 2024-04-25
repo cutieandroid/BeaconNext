@@ -1,5 +1,6 @@
 package com.example.beaconnext.api.AuthClient;
 
+import com.example.beaconnext.models.AttendanceReport;
 import com.example.beaconnext.models.AttendanceRequest;
 import com.example.beaconnext.models.AttendanceResponse;
 import com.example.beaconnext.models.AttendanceResultRequest;
@@ -13,6 +14,7 @@ import com.example.beaconnext.models.MarkPresentRequest;
 import com.example.beaconnext.models.Notifications;
 import com.example.beaconnext.models.Student;
 import com.example.beaconnext.models.Teacher;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,4 +78,7 @@ public interface AuthApiInterface {
 
     @GET("get-notification-student")
     Call<List<Notifications>> getNotifications(@Header("Authorization") String token);
+
+    @GET("get-attendance")
+    Call<JsonObject> reportgenerator(@Header("Authorization") String token, @Body AttendanceReport attendanceReport);
 }

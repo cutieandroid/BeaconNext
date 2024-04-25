@@ -17,10 +17,12 @@ import com.example.beaconnext.R;
 import com.example.beaconnext.api.AuthClient.AuthApiClient;
 import com.example.beaconnext.api.AuthClient.AuthApiInterface;
 import com.example.beaconnext.customwidgets.BottomSheet;
+import com.example.beaconnext.models.AttendanceReport;
 import com.example.beaconnext.models.Lecture;
 import com.example.beaconnext.models.Teacher;
 import com.example.beaconnext.singleton.DateHandler;
 import com.example.beaconnext.singleton.LocalStorage;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -31,7 +33,7 @@ import retrofit2.Response;
 public class ProfDashboard extends AppCompatActivity {
     Button createAttendacne;
     TextView sname, placeHolderText, lectime, classroom, subname, lecturer;
-    CardView scheduledLectures, cardViewNew, lectureHistory,notibutton,markstudent, requestButton;
+    CardView scheduledLectures, cardViewNew, lectureHistory,notibutton,markstudent, requestButton, genreport;
     ImageView imageview5;
     LocalStorage ls;
     ProgressBar progressBar;
@@ -51,6 +53,7 @@ public class ProfDashboard extends AppCompatActivity {
         createAttendacne = findViewById(R.id.createAttendance);
         sname = findViewById(R.id.sname);
         scheduledLectures = findViewById(R.id.scheduledlectures);
+        genreport=findViewById(R.id.genreport);
         ls = new LocalStorage(this);
         System.out.println(ls.getToken());
         Teacher currentuser = ls.getCurrentTeacher();
@@ -136,6 +139,14 @@ public class ProfDashboard extends AppCompatActivity {
 
             }
         });
+
+        genreport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reportGenerator();
+
+            }
+        });
       /*  requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,5 +201,25 @@ public class ProfDashboard extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void reportGenerator(){
+        String token= ls.getToken();
+        AttendanceReport report= new AttendanceReport("Computer",4,"B");
+        Call<JsonObject> attendancereportcall = apiInterface.reportgenerator(token,report);
+        attendancereportcall.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                JsonObject reportresponse=response.body();
+                System.out.println(reportresponse.toString());
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+
+
     }
 }

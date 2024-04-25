@@ -150,7 +150,13 @@ public class CreateLecture extends AppCompatActivity {
                     progressDialog.dismiss();
                     Toast.makeText(CreateLecture.this, "Lecture created successfully :)", Toast.LENGTH_SHORT).show();
                     finish();
-                } else {
+                } else if (response.code()==500) {
+
+                    Toast.makeText(CreateLecture.this, "Ongoing lecture found, cannot create lecture :(", Toast.LENGTH_SHORT).show();
+
+                    progressDialog.dismiss();
+                }
+                else {
                     progressDialog.dismiss();
                     int message= response.code();
                     Toast.makeText(CreateLecture.this, ""+message, Toast.LENGTH_SHORT).show();
